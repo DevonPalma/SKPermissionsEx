@@ -1,0 +1,41 @@
+key:
+	finished - completed and tested
+	done - done but untested
+	check - started but not finished
+	needed - not started at all
+
+	group commands
+ExprGroup - finished
+ExprPermission - finished
+EffTimedPermission - finished
+ExprPrefix - finished
+ExprWeight - finished
+ExprSuffix - finished
+ExprParents - finished
+ExprOption - finished
+ExprUsersList - finished
+ExprDefault - finished
+
+
+	promotion commands
+ExprRankGroup - needed
+EffRank - needed
+	- demotes/promotes user on ladder
+
+	user commands
+ExprUsers
+ExprPermission
+ExprPrefix
+ExprSuffix
+CondCheckPerm
+ExprOption
+EffTimedPermission
+ExprGroupsList
+EffCleanup
+
+	utils
+ExprVersion
+
+	worlds
+ExprWorlds
+ExprParent
