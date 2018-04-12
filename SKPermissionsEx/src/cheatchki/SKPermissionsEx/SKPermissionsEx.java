@@ -7,10 +7,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 
 public class SKPermissionsEx extends JavaPlugin implements Listener {
 	
@@ -20,7 +16,7 @@ public class SKPermissionsEx extends JavaPlugin implements Listener {
 	
 	public void onEnable() {
 		try {
-			getAddonInstance().loadClasses("cheatchki.SKPermissionsEx", "GroupCommands");
+			getAddonInstance().loadClasses("cheatchki.SKPermissionsEx", "classes", "Expressions", "Utils");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

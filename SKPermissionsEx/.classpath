@@ -2,14 +2,9 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/deedp/Downloads/BuildTools.jar"/>
-	<classpathentry kind="lib" path="C:/Users/deedp/Downloads/spigot-1.12.2.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/spigot/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/deedp/Downloads/Vault.jar"/>
+	<classpathentry kind="lib" path="C:/Users/deedp/Documents/minecraft server/spigot-1.12.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/deedp/Documents/minecraft server/plugins/PermissionsEx-1.23.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/deedp/Downloads/Skript.jar"/>
+	<classpathentry kind="lib" path="C:/Users/deedp/Documents/minecraft server/plugins/Skript.jar"/>
+	<classpathentry kind="lib" path="C:/Users/deedp/Documents/minecraft server/plugins/Vault.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
