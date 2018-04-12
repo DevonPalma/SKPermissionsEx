@@ -19,6 +19,7 @@ public class EffCreateEntity extends Effect{
 	
 	private Expression<PermissionEntity> entity;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] arg0, int arg1, Kleenean arg2, ParseResult arg3) {
 		entity = (Expression<PermissionEntity>) arg0[0];

@@ -1,6 +1,6 @@
 package cheatchki.SKPermissionsEx.Expressions;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -14,18 +14,18 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import ru.tehkode.permissions.PermissionGroup;
+import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-public class ExprGroups extends SimpleExpression<PermissionGroup> {
+public class ExprAllUsers extends SimpleExpression<PermissionUser> {
 
 	static {
-		Skript.registerExpression(ExprGroups.class, PermissionGroup.class, ExpressionType.SIMPLE, "all [pex] groups");
+		Skript.registerExpression(ExprAllUsers.class, PermissionUser.class, ExpressionType.SIMPLE, "all [pex] users");
 	}
 	
 	@Override
-	public Class<? extends PermissionGroup> getReturnType() {
-		return PermissionGroup.class;
+	public Class<? extends PermissionUser> getReturnType() {
+		return PermissionUser.class;
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class ExprGroups extends SimpleExpression<PermissionGroup> {
 
 	@Override
 	@Nullable
-	protected PermissionGroup[] get(Event arg0) {
-		List<PermissionGroup> groups = PermissionsEx.getPermissionManager().getGroupList();
-		return groups.toArray(new PermissionGroup[groups.size()]);
+	protected PermissionUser[] get(Event arg0) {
+		Set<PermissionUser> users = PermissionsEx.getPermissionManager().getUsers();
+		return users.toArray(new PermissionUser[users.size()]);
 	}
 
 	@Override
@@ -59,9 +59,9 @@ public class ExprGroups extends SimpleExpression<PermissionGroup> {
 
 	@Override
 	public void change(Event e, Object[] delta, ChangeMode mode) {
-		for (PermissionGroup g : PermissionsEx.getPermissionManager().getGroupList()) {
+		for (PermissionUser g : PermissionsEx.getPermissionManager().getUsers()) {
 			g.remove();
-			PermissionsEx.getPermissionManager().resetGroup(g.getIdentifier());
+			PermissionsEx.getPermissionManager().resetUser(g.getName());;
 		}
 	}
 }

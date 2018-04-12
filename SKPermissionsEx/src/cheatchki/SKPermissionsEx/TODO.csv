@@ -1,0 +1,20 @@
+expressions,,,,
+expression,types,effects,finished,tested
+name,entity,none,yes,yes
+prefix,entity,"set, delete",yes,yes
+suffix,entity,"set, delete",yes,yes
+permission,entity,"add, remove",yes,yes
+options,entity,set,,
+parents,entity,"add, remove",,
+weight,group,"set, delete",,
+rank,group,"set, delete",,
+rank ladder,group,"set, delete",,
+group's users,group,"add, remove",,
+default,group,set,yes,yes
+get,"group, user",,yes,yes
+all users,,,yes,yes
+all groups,,,yes,yes
+,,,,
+effects,,,,
+effect,types,finished,tested,
+create,entity,yes,yes,
