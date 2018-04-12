@@ -47,7 +47,7 @@ public class ExprGetUser extends SimpleExpression<PermissionUser>{
 
 	@Override
 	public String toString(@Nullable Event arg0, boolean arg1) {
-		return "pex group (%string%|%player%)";
+		return "pex group player";
 	}
 
 	@Override
