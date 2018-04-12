@@ -8,6 +8,7 @@ import org.bukkit.event.Event;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
+import cheatchki.SKPermissionsEx.Utils.CheatsUtils;
 import cheatchki.SKPermissionsEx.Utils.WorldConverter;
 
 /**
@@ -45,6 +46,8 @@ public abstract class SimpleWorldPropertyExpression<F, T> extends WorldPropertyE
 	
 	@Override
 	public String toString(final @Nullable Event e, final boolean debug) {
-		return "the " + getPropertyName() + " of " + getExpr().toString(e, debug) + " in world " + getWorld().toString(e, debug);
+		return "the " + getPropertyName() 
+			+ " of " +  getExpr().toString(e, debug); 
+//			+ " in world " + CheatsUtils.getName(getWorld(e));
 	}
 }

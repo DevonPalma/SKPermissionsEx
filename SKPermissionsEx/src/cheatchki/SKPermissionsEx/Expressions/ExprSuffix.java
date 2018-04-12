@@ -9,11 +9,7 @@ import cheatchki.SKPermissionsEx.Utils.CheatsUtils;
 import cheatchki.SKPermissionsEx.classes.base.SimpleWorldPropertyExpression;
 import ru.tehkode.permissions.PermissionEntity;
 
-public class ExprPrefix extends SimpleWorldPropertyExpression<PermissionEntity, String> {
-
-	static {
-		register(ExprPrefix.class, String.class, "prefix", "permissionentity");
-	}
+public class ExprSuffix extends SimpleWorldPropertyExpression<PermissionEntity, String>{
 
 	@Override
 	public Class<? extends String> getReturnType() {
@@ -22,12 +18,12 @@ public class ExprPrefix extends SimpleWorldPropertyExpression<PermissionEntity, 
 
 	@Override
 	public String getPropertyName() {
-		return "prefix";
+		return "suffix";
 	}
 
 	@Override
 	public String convert(World world, PermissionEntity f) {
-		return f.getPrefix(CheatsUtils.getName(world));
+		return f.getSuffix(CheatsUtils.getName(world));
 	}
 
 	@Override
@@ -40,19 +36,15 @@ public class ExprPrefix extends SimpleWorldPropertyExpression<PermissionEntity, 
 		default:
 			return null;
 		}
-
 	}
 
 	@Override
 	public void change(Event e, Object[] delta, ChangeMode mode) {
-		String prefix = null;
-		if (mode == ChangeMode.SET)
-			prefix = (String) delta[0];
-		getExpr().getSingle(e).setPrefix(prefix, CheatsUtils.getName(getWorld(e)));
-		
+		String suffix = null;
+		if (mode == ChangeMode.SET) {
+			suffix = (String) delta[0];
+		}
+		getExpr().getSingle(e).setSuffix(suffix, CheatsUtils.getName(getWorld(e)));
 	}
-	
-	
-
 
 }
