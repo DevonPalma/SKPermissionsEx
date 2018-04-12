@@ -1,7 +1,10 @@
-package cheatchki.SKPermissionsEx.classes;
+package cheatchki.SKPermissionsEx.Expressions;
+
+import java.util.List;
 
 import javax.annotation.Nullable;
 
+import org.bukkit.World;
 import org.bukkit.event.Event;
 
 import ch.njol.skript.Skript;
@@ -12,17 +15,19 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
+import cheatchki.SKPermissionsEx.Utils.CheatsUtils;
 import ru.tehkode.permissions.PermissionGroup;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-public class ExprGetGroup extends SimpleExpression<PermissionGroup>{
+public class ExprDefault extends SimpleExpression<PermissionGroup> {
 
 	static {
-		Skript.registerExpression(ExprGetGroup.class, PermissionGroup.class, ExpressionType.SIMPLE,
-				"pex group %string%");
+		Skript.registerExpression(ExprDefault.class, PermissionGroup.class, ExpressionType.SIMPLE,
+				"[pex] default group[s] [in [world] %-world%]");
 	}
 	
-	private Expression<String> name;
+	private Expression<World> world;
+	
 	
 	@Override
 	public Class<? extends PermissionGroup> getReturnType() {
@@ -37,32 +42,44 @@ public class ExprGetGroup extends SimpleExpression<PermissionGroup>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] arg0, int arg1, Kleenean arg2, ParseResult arg3) {
-		name = (Expression<String>) arg0[0];
+		world = (Expression<World>) arg0[0];
 		return true;
 	}
 
 	@Override
 	public String toString(@Nullable Event arg0, boolean arg1) {
-		return "pex group %string%";
+		return "default group";
 	}
 
 	@Override
 	@Nullable
 	protected PermissionGroup[] get(Event arg0) {
-		return new PermissionGroup[] { PermissionsEx.getPermissionManager().getGroup(name.getSingle(arg0)) };
+		String worldName = CheatsUtils.getName(world != null ? world.getSingle(arg0) : null);
+		List<PermissionGroup> g = PermissionsEx.getPermissionManager().getDefaultGroups(worldName);
+		return g.toArray(new PermissionGroup[g.size()]);
 	}
 
 	@Override
 	public Class<?>[] acceptChange(ChangeMode mode) {
-		if (mode == ChangeMode.DELETE) {
-			return CollectionUtils.array();
+		if (mode == ChangeMode.SET) {
+			return CollectionUtils.array(PermissionGroup.class);
 		}
 		return null;
+		
 	}
 
 	@Override
 	public void change(Event e, Object[] delta, ChangeMode mode) {
-		get(e)[0].remove();
+		String worldName = CheatsUtils.getName(world != null ? world.getSingle(e) : null);
+		PermissionGroup defaultGroup = (PermissionGroup) delta[0];
+		
+		for (PermissionGroup g : PermissionsEx.getPermissionManager().getDefaultGroups(worldName)) {
+			g.setDefault(false, worldName);
+		}
+		
+		if (mode == ChangeMode.SET) {
+			defaultGroup.setDefault(true, worldName);
+		} 
 	}
 
 }

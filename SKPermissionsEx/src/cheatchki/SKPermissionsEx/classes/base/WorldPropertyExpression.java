@@ -25,8 +25,13 @@ import cheatchki.SKPermissionsEx.Utils.WorldConverters;
 
 public abstract class WorldPropertyExpression<F, T> extends PropertyExpression<F, T> {
 	
+
 	public static <T> void register(final Class<? extends Expression<T>> c, final Class<T> type, final String property, final String fromType) {
-		Skript.registerExpression(c, type, ExpressionType.PROPERTY, 
+		register(c, type, "", property, fromType);
+	}
+	
+	public static <T> void register(final Class<? extends Expression<T>> c, final Class<T> type, final String prefix, final String property, final String fromType) {
+		Skript.registerExpression(c, type, ExpressionType.COMBINED, 
 				"[the] " + property + " of %" + fromType + "%" + " [in [world] %-world%]",
 				"%" + fromType + "%'[s] " + property + " [in [world] %-world%]");
 	}

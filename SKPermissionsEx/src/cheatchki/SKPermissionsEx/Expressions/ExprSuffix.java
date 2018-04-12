@@ -11,6 +11,10 @@ import ru.tehkode.permissions.PermissionEntity;
 
 public class ExprSuffix extends SimpleWorldPropertyExpression<PermissionEntity, String>{
 
+	static {
+		register(ExprSuffix.class, String.class, "[(vault|pex)] suffix", "permissionentity");
+	}
+	
 	@Override
 	public Class<? extends String> getReturnType() {
 		return String.class;

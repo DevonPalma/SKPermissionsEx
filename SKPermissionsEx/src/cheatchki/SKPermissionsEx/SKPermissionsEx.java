@@ -16,7 +16,7 @@ public class SKPermissionsEx extends JavaPlugin implements Listener {
 	
 	public void onEnable() {
 		try {
-			getAddonInstance().loadClasses("cheatchki.SKPermissionsEx", "classes", "Expressions", "Utils");
+			getAddonInstance().loadClasses("cheatchki.SKPermissionsEx", "classes", "Expressions", "Utils", "Effects");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

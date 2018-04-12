@@ -12,7 +12,7 @@ import ru.tehkode.permissions.PermissionEntity;
 public class ExprPrefix extends SimpleWorldPropertyExpression<PermissionEntity, String> {
 
 	static {
-		register(ExprPrefix.class, String.class, "prefix", "permissionentity");
+		register(ExprPrefix.class, String.class, "[(vault|pex)] prefix", "permissionentity");
 	}
 
 	@Override

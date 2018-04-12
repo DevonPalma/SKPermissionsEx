@@ -1,4 +1,6 @@
-package cheatchki.SKPermissionsEx.classes;
+package cheatchki.SKPermissionsEx.Expressions;
+
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -12,57 +14,54 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import ru.tehkode.permissions.PermissionGroup;
+import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-public class ExprGetGroup extends SimpleExpression<PermissionGroup>{
+public class ExprAllUsers extends SimpleExpression<PermissionUser> {
 
 	static {
-		Skript.registerExpression(ExprGetGroup.class, PermissionGroup.class, ExpressionType.SIMPLE,
-				"pex group %string%");
+		Skript.registerExpression(ExprAllUsers.class, PermissionUser.class, ExpressionType.SIMPLE, "all [pex] users");
 	}
 	
-	private Expression<String> name;
-	
 	@Override
-	public Class<? extends PermissionGroup> getReturnType() {
-		return PermissionGroup.class;
+	public Class<? extends PermissionUser> getReturnType() {
+		return PermissionUser.class;
 	}
 
 	@Override
 	public boolean isSingle() {
-		return true;
+		return false;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] arg0, int arg1, Kleenean arg2, ParseResult arg3) {
-		name = (Expression<String>) arg0[0];
 		return true;
 	}
 
 	@Override
 	public String toString(@Nullable Event arg0, boolean arg1) {
-		return "pex group %string%";
+		return "groups";
 	}
 
 	@Override
 	@Nullable
-	protected PermissionGroup[] get(Event arg0) {
-		return new PermissionGroup[] { PermissionsEx.getPermissionManager().getGroup(name.getSingle(arg0)) };
+	protected PermissionUser[] get(Event arg0) {
+		Set<PermissionUser> users = PermissionsEx.getPermissionManager().getUsers();
+		return users.toArray(new PermissionUser[users.size()]);
 	}
 
 	@Override
 	public Class<?>[] acceptChange(ChangeMode mode) {
-		if (mode == ChangeMode.DELETE) {
+		if (mode == ChangeMode.DELETE) 
 			return CollectionUtils.array();
-		}
 		return null;
 	}
 
 	@Override
 	public void change(Event e, Object[] delta, ChangeMode mode) {
-		get(e)[0].remove();
+		for (PermissionUser g : PermissionsEx.getPermissionManager().getUsers()) {
+			g.remove();
+			PermissionsEx.getPermissionManager().resetUser(g.getName());;
+		}
 	}
-
 }

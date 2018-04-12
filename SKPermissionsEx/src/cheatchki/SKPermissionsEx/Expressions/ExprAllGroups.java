@@ -1,4 +1,6 @@
-package cheatchki.SKPermissionsEx.classes;
+package cheatchki.SKPermissionsEx.Expressions;
+
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -15,14 +17,11 @@ import ch.njol.util.coll.CollectionUtils;
 import ru.tehkode.permissions.PermissionGroup;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-public class ExprGetGroup extends SimpleExpression<PermissionGroup>{
+public class ExprAllGroups extends SimpleExpression<PermissionGroup> {
 
 	static {
-		Skript.registerExpression(ExprGetGroup.class, PermissionGroup.class, ExpressionType.SIMPLE,
-				"pex group %string%");
+		Skript.registerExpression(ExprAllGroups.class, PermissionGroup.class, ExpressionType.SIMPLE, "all [pex] groups");
 	}
-	
-	private Expression<String> name;
 	
 	@Override
 	public Class<? extends PermissionGroup> getReturnType() {
@@ -31,38 +30,38 @@ public class ExprGetGroup extends SimpleExpression<PermissionGroup>{
 
 	@Override
 	public boolean isSingle() {
-		return true;
+		return false;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] arg0, int arg1, Kleenean arg2, ParseResult arg3) {
-		name = (Expression<String>) arg0[0];
 		return true;
 	}
 
 	@Override
 	public String toString(@Nullable Event arg0, boolean arg1) {
-		return "pex group %string%";
+		return "groups";
 	}
 
 	@Override
 	@Nullable
 	protected PermissionGroup[] get(Event arg0) {
-		return new PermissionGroup[] { PermissionsEx.getPermissionManager().getGroup(name.getSingle(arg0)) };
+		List<PermissionGroup> groups = PermissionsEx.getPermissionManager().getGroupList();
+		return groups.toArray(new PermissionGroup[groups.size()]);
 	}
 
 	@Override
 	public Class<?>[] acceptChange(ChangeMode mode) {
-		if (mode == ChangeMode.DELETE) {
+		if (mode == ChangeMode.DELETE) 
 			return CollectionUtils.array();
-		}
 		return null;
 	}
 
 	@Override
 	public void change(Event e, Object[] delta, ChangeMode mode) {
-		get(e)[0].remove();
+		for (PermissionGroup g : PermissionsEx.getPermissionManager().getGroupList()) {
+			g.remove();
+			PermissionsEx.getPermissionManager().resetGroup(g.getIdentifier());
+		}
 	}
-
 }
