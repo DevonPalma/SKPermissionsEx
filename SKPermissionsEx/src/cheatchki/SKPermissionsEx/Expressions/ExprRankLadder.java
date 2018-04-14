@@ -1,7 +1,5 @@
 package cheatchki.SKPermissionsEx.Expressions;
 
-import javax.annotation.Nullable;
-
 import org.bukkit.event.Event;
 
 import ch.njol.skript.classes.Changer.ChangeMode;
@@ -9,48 +7,49 @@ import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.util.coll.CollectionUtils;
 import ru.tehkode.permissions.PermissionGroup;
 
-public class ExprRank extends SimplePropertyExpression<PermissionGroup, Number>{
+public class ExprRankLadder extends SimplePropertyExpression<PermissionGroup, String>{
 
 	static {
-		register(ExprRank.class, Number.class, "rank", "permissiongroup");
+		register(ExprRankLadder.class, String.class, "rankladder", "permissiongroup");
 	}
 	
 	@Override
-	public Class<? extends Number> getReturnType() {
-		return Number.class;
+	public Class<? extends String> getReturnType() {
+		return String.class;
 	}
 
 	@Override
-	@Nullable
-	public Number convert(PermissionGroup arg0) {
-		return arg0.getRank();
+	public String getPropertyName() {
+		return "rank ladder";
 	}
 
 	@Override
-	protected String getPropertyName() {
-		return "rank";
+	public String convert(PermissionGroup f) {
+		return f.getRankLadder();
 	}
 
 	@Override
 	public Class<?>[] acceptChange(ChangeMode mode) {
 		switch (mode) {
 		case SET:
-			return CollectionUtils.array(Number.class);
+			return CollectionUtils.array(String.class);
 		case DELETE:
 			return CollectionUtils.array();
 		default:
 			return null;
 		}
-		
 	}
 
 	@Override
 	public void change(Event e, Object[] delta, ChangeMode mode) {
 		PermissionGroup g = getExpr() != null ? getExpr().getSingle(e) : null;
-		Number rank = 0;
+		String rankLadder = null;
 		if (mode == ChangeMode.SET) 
-			rank = (Number) delta[0];
+			rankLadder = (String) delta[0];
 		if (g != null)
-			g.setRank(rank.intValue());
-	}	
+			g.setRankLadder(rankLadder);
+	}
+	
+	
+	
 }

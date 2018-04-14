@@ -8,13 +8,11 @@ import org.bukkit.World;
 import org.bukkit.event.Event;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.classes.Changer.ChangeMode;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import ch.njol.util.coll.CollectionUtils;
 import cheatchki.SKPermissionsEx.Utils.CheatsUtils;
 import ru.tehkode.permissions.PermissionEntity;
 
@@ -59,28 +57,28 @@ public class ExprPermissions extends SimpleExpression<String>{
 		List<String> perms = entity.getSingle(arg0).getPermissions(CheatsUtils.getName(world));
 		return perms.toArray(new String[perms.size()]);
 	}
-
-	@Override
-	public Class<?>[] acceptChange(ChangeMode mode) {
-		switch(mode) {
-		case ADD:
-		case REMOVE:
-			return CollectionUtils.array(String.class);
-		default:
-			return null;
-		}
-		
-	}
-
-	@Override
-	public void change(Event e, Object[] delta, ChangeMode mode) {
-		World world = this.world != null ? this.world.getSingle(e) : null;
-		String permission = (String) delta[0];
-		
-		if (mode == ChangeMode.ADD)
-			entity.getSingle(e).addPermission(permission, CheatsUtils.getName(world));
-		else 
-			entity.getSingle(e).removePermission(permission, CheatsUtils.getName(world));
-	}
+//
+//	@Override
+//	public Class<?>[] acceptChange(ChangeMode mode) {
+//		switch(mode) {
+//		case ADD:
+//		case REMOVE:
+//			return CollectionUtils.array(String.class);
+//		default:
+//			return null;
+//		}
+//		
+//	}
+//
+//	@Override
+//	public void change(Event e, Object[] delta, ChangeMode mode) {
+//		World world = this.world != null ? this.world.getSingle(e) : null;
+//		String permission = (String) delta[0];
+//		
+//		if (mode == ChangeMode.ADD)
+//			entity.getSingle(e).addPermission(permission, CheatsUtils.getName(world));
+//		else 
+//			entity.getSingle(e).removePermission(permission, CheatsUtils.getName(world));
+//	}
 	
 }

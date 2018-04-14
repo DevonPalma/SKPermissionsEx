@@ -1,6 +1,6 @@
 main: cheatchki.SKPermissionsEx.SKPermissionsEx
 name: SKPermissionsEX
-version: 0.4.1
+version: 0.5.1
 author: cheatchki
 description: Addon for skript for PermissionsEx
 commands:

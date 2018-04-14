@@ -4,11 +4,11 @@ name,entity,none,yes,yes
 prefix,entity,"set, delete",yes,yes
 suffix,entity,"set, delete",yes,yes
 permission,entity,"add, remove",yes,yes
-options,entity,set,,
+options,entity,set,yes,
 parents,entity,"add, remove",yes,yes
 weight,group,"set, delete",yes,yes
 rank,group,"set, delete",yes,yes
-rank ladder,group,"set, delete",,
+rank ladder,group,"set, delete",yes,
 group's users,group,"add, remove",yes,yes
 default,group,set,yes,yes
 get,"group, user",,yes,yes

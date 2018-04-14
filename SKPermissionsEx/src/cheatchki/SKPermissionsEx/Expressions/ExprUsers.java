@@ -1,7 +1,5 @@
 package cheatchki.SKPermissionsEx.Expressions;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -18,7 +16,6 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import cheatchki.SKPermissionsEx.Utils.CheatsUtils;
-import ru.tehkode.permissions.PermissionEntity;
 import ru.tehkode.permissions.PermissionGroup;
 import ru.tehkode.permissions.PermissionUser;
 
